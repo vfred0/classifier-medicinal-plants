@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Menu extends StatelessWidget {
-  final int selectedIndex;
-  final Function(int) onItemTapped;
+  final int menuOptionSelected;
+  final Function(int) onOptionMenuSelected;
 
   const Menu(
-      {super.key, required this.selectedIndex, required this.onItemTapped});
+      {super.key,
+      required this.menuOptionSelected,
+      required this.onOptionMenuSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +32,12 @@ class Menu extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.secondary,
         ),
       ],
-      currentIndex: selectedIndex,
+      currentIndex: menuOptionSelected,
       selectedItemColor: Theme.of(context).colorScheme.tertiary,
       unselectedItemColor: Theme.of(context).colorScheme.secondary,
       selectedLabelStyle: Theme.of(context).textTheme.titleMedium,
       unselectedLabelStyle: Theme.of(context).textTheme.bodyMedium,
-      onTap: onItemTapped,
+      onTap: onOptionMenuSelected,
     );
   }
 }

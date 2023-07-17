@@ -12,8 +12,7 @@ class MedicinalPlantApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ui.Theme().theme(),
-      title: 'Clasificador de plantas medicinales',
+      theme: ui.Theme().theme(),      
       home: const ScaffoldWithMenu(),
       debugShowCheckedModeBanner: false,
     );
@@ -28,16 +27,16 @@ class ScaffoldWithMenu extends StatefulWidget {
 }
 
 class _ScaffoldWithMenuState extends State<ScaffoldWithMenu> {
-  int _selectedIndex = 0;
+  int _menuOptionSelected = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  static const List<Widget> _pages = <Widget>[
     ClassifierPage(),
     NeuralNetworkDetailsPage(),
   ];
 
-  void _onItemTapped(int index) {
+  void _onOptionMenuSelected(int menuOptionSelected) {
     setState(() {
-      _selectedIndex = index;
+      _menuOptionSelected = menuOptionSelected;
     });
   }
 
@@ -55,12 +54,12 @@ class _ScaffoldWithMenuState extends State<ScaffoldWithMenu> {
       ),
       body: SingleChildScrollView(
         child: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
+          child: _pages.elementAt(_menuOptionSelected),
         ),
       ),
       bottomNavigationBar: Menu(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
+        menuOptionSelected: _menuOptionSelected,
+        onOptionMenuSelected: _onOptionMenuSelected,
       ),
     );
   }

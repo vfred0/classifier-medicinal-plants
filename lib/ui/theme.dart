@@ -8,7 +8,7 @@ class Theme {
               primary: const Color(0xFF161D22),
               secondary: const Color(0xFFEFEFEF),
               tertiary: const Color(0xFF20B266),
-              brightness: Brightness.dark,
+              brightness: Brightness.dark,              
             ),
         textTheme: GoogleFonts.montserratTextTheme(
           const TextTheme(
@@ -26,7 +26,7 @@ class Theme {
               fontSize: 18,
               fontWeight: FontWeight.w500,
               color: Color(0xFFEFEFEF),
-            ),
+            ),            
           ),
         ),
       );

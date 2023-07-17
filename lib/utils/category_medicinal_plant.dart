@@ -100,8 +100,7 @@ enum CategoryMedicinalPlant {
   final String _description;
   final String _image;
 
-  const CategoryMedicinalPlant(this._name, this._image,
-      [this._description = '']);
+  const CategoryMedicinalPlant(this._name, this._image, this._description);
 
   String get name => _name;
   String get image => _image;

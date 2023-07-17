@@ -6,7 +6,7 @@ import 'package:medicinal_plants/ui/theme.dart' as ui;
 import 'package:image_picker/image_picker.dart';
 import 'package:medicinal_plants/utils/classifier_medicinal_plant.dart';
 import 'package:medicinal_plants/models/medicinal_plant.dart';
-import 'package:medicinal_plants/ui/widgets/button.dart';
+import 'package:medicinal_plants/ui/widgets/action_button.dart';
 import 'package:medicinal_plants/ui/widgets/show_medicinal_plant_prediction.dart';
 
 class ClassifierPage extends StatefulWidget {

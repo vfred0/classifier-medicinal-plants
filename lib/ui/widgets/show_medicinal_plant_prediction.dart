@@ -28,7 +28,7 @@ class ShowMedicinalPlantPrediction extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ui.Theme().bodyLarge('Confianza: ${medicinalPlant.confidence}%'),
+          ui.Theme().bodyLarge('Confianza: ${medicinalPlant.confidence}%'),                    
           const Gap(12),
           ui.Theme()
               .titleMedium('La planta es ${medicinalPlant.category.name}'),

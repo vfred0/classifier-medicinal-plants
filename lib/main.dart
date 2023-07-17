@@ -1,169 +1,104 @@
-import 'dart:io';
-
-import 'package:plants/pages/neural_network_details_page.dart';
+import 'package:medicinal_plants/pages/classifier_medicinal_plants_page.dart';
+import 'package:medicinal_plants/pages/home_page.dart';
+import 'package:medicinal_plants/pages/neural_network_details_page.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:plants/models/disease_tomato_leaf.dart';
-import 'package:plants/widgets/show_prediction.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import 'plants.dart';
+void main() => runApp(const MyApp());
 
-void main() {
-  runApp(const MaterialApp(
-    home: HomeClassifierDiseaseLeaf(),
-    debugShowCheckedModeBanner: false,
-  ));
-}
-
-class HomeClassifierDiseaseLeaf extends StatefulWidget {
-  const HomeClassifierDiseaseLeaf({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
-  State<HomeClassifierDiseaseLeaf> createState() =>
-      _HomeClassifierDiseaseLeafState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        textTheme: GoogleFonts.montserratTextTheme(Theme.of(context)
+                .textTheme
+                .apply(bodyColor: const Color(0xFFEFEFEF)))
+            .copyWith(
+          bodyMedium: GoogleFonts.montserrat(
+            fontSize: 18,
+            fontWeight: FontWeight.w400,
+            color: const Color(0xFFEFEFEF),
+          ),
+          titleMedium: GoogleFonts.montserrat(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: const Color(0xFFEFEFEF),
+          ),
+        ),
+      ),
+      title: 'Clasificador de plantas medicinales',
+      home: const MyStatefulWidget(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
 }
 
-class _HomeClassifierDiseaseLeafState extends State<HomeClassifierDiseaseLeaf> {
-  File? _image;
-  DiseaseTomatoLeaf? _diseaseTomatoLeaf;
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({super.key});
+
+  @override
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  int _selectedIndex = 0;
+  double buttonSize = 30;
+  static const List<Widget> _widgetOptions = <Widget>[
+    HomePage(),
+    ClassifierMedicinalPlantPage(),
+    NeuralNetworkDetailsPage()
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 20, 22, 20),
-      appBar: AppBar(
-        title: const Text(
-          'Clasificador de plantas',
-          textAlign: TextAlign.center,
-        ),
-        backgroundColor: const Color.fromARGB(255, 20, 22, 20),
-        elevation: 0, // Elimina la línea que separa la barra del cuerpo
-        centerTitle: true, // Centra el título en la barra
-      ),
-      body: Column(
-        children: [
-          const Gap(12),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                  10), // Redondear los bordes de la imagen
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(
-                  10), // Redondear los bordes de la imagen
-              child: setImage(),
-            ),
+        backgroundColor: const Color(0xFF161D22),
+        appBar: AppBar(
+          title: Text(
+            'Clasificador de plantas medicinales',
+            style: Theme.of(context).textTheme.titleLarge,
           ),
-          const Gap(12),
-          Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                child: TextButton.icon(
-                  onPressed: () =>
-                      loadImageAndSetPrediction(ImageSource.gallery),
-                  icon: Icon(Icons.image_search_outlined),
-                  label: Text('Carga la foto'),
-                  style: TextButton.styleFrom(
-                    primary: Color.fromARGB(255, 119, 119, 176),
-                    backgroundColor: Colors.white,
-                    textStyle: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 78,
-                        vertical:
-                            12), // Ajustar el padding para hacer los botones más anchos
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          8), // Establecer el radio de los bordes redondeados
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                child: TextButton.icon(
-                  onPressed: () =>
-                      loadImageAndSetPrediction(ImageSource.camera),
-                  icon: Icon(Icons.camera_alt),
-                  label: Text('Toma la foto'),
-                  style: TextButton.styleFrom(
-                    primary: Color.fromARGB(255, 119, 119, 176),
-                    backgroundColor: Colors.white,
-                    textStyle: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 78,
-                        vertical:
-                            12), // Ajustar el padding para hacer los botones más anchos
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          10), // Establecer el radio de los bordes redondeados
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const Gap(12),
-          ShowPrediction(_diseaseTomatoLeaf),
-        ],
-      ),
-    );
-  }
-
-  Future<void> loadImageAndSetPrediction(ImageSource imageSource) {
-    return getImage(imageSource).then((image) {
-      ClassifierDiseaseTomatoLeaf()
-          .getPrediction(image)
-          .then((diseaseTomatoLeaf) {
-        setState(() {
-          _image = image;
-          _diseaseTomatoLeaf = diseaseTomatoLeaf;
-        });
-      });
-    });
-  }
-
-  Future<File> getImage(ImageSource source) async {
-    final image = await ImagePicker().pickImage(source: source);
-    return File(image!.path);
-  }
-
-  Widget setImage() {
-    if (_image != null) {
-      return Container(
-        width: 275,
-        height: 275,
-        decoration: BoxDecoration(
-          borderRadius:
-              BorderRadius.circular(10), // Redondear los bordes del contenedor
-          color: Colors.white, // Color de fondo del contenedor
+          backgroundColor: const Color(0xFF161D22),
         ),
-        child: ClipRRect(
-          borderRadius:
-              BorderRadius.circular(10), // Redondear los bordes de la imagen
-          child: Image.file(_image!),
-        ),
-      );
-    }
-    return Image.asset(
-      'assets/images/tomato-leaf.png',
-      width: 275,
-      height: 275,
-      fit: BoxFit.cover,
-    );
-  }
-
-  goToDetailsModal(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const NeuralNetworkDetailsPage()),
-    );
+        body: SingleChildScrollView(
+            child: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        )),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: const Color(0xFF161D22),
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined, size: buttonSize),
+              label: 'Inicio',
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.camera_alt_outlined,
+                  size: buttonSize,
+                ),
+                label: 'Tomar foto',
+                backgroundColor: const Color.fromARGB(255, 20, 128, 230)),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.info_outline,
+                  size: buttonSize,
+                ),
+                label: 'Detalles CNN',
+                backgroundColor: const Color.fromARGB(255, 112, 118, 123)),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: const Color(0xFF20B266),
+          unselectedItemColor: const Color.fromARGB(255, 93, 83, 83),
+          onTap: _onItemTapped,
+        ));
   }
 }

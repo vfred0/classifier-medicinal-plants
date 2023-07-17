@@ -1,3 +1,4 @@
+import 'package:medicinal_plants/widgets/training_parameter.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -6,47 +7,40 @@ class NeuralNetworkDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Detalles de la red neuronal'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        backgroundColor: const Color.fromARGB(255, 252, 252, 252),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Arquitectura',
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800),
-              ),
-              const Gap(12),
-              Image.asset('assets/images/architecture.png'),
-              const Gap(28),
-              const Text(
-                'Curvas de aprendizaje',
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800),
-              ),
-              const Gap(12),
-              Image.asset('assets/images/curves.png'),
-              const Gap(28),
-              const Text(
-                'Parámetros de entrenamiento',
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800),
-              ),
-              const Gap(12),
-              const Text(
-                'Learning rate: 0.01  Batch Size: 32  Epochs: 10',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Arquitectura',
+            style: Theme.of(context).textTheme.titleMedium,
           ),
-        ),
+          const Gap(12),
+          Image.asset('assets/model/details/architecture.png'),
+          const Gap(28),
+          Text(
+            'Curvas de aprendizaje',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const Gap(12),
+          Image.asset('assets/model/details/accuracy.png'),
+          const Gap(12),
+          Image.asset('assets/model/details/loss.png'),
+          const Gap(28),
+          Text(
+            'Parámetros de entrenamiento',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const Gap(12),
+          const TrainingParameter('Learning rate: 0.0001'),
+          const Gap(12),
+          const TrainingParameter('Batch size: 32'),
+          const Gap(12),
+          const TrainingParameter('Epochs: 10'),
+          const Gap(12),
+          const TrainingParameter('Optimizer: Adam'),
+        ],
       ),
     );
   }

@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-class Button extends StatelessWidget {
+class ActionButton extends StatelessWidget {
   final String title;
   final IconData icon;
   final VoidCallback onClick;
 
-  const Button(this.title, this.icon, this.onClick, {super.key});
+  const ActionButton(this.title, this.icon, this.onClick, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 300,
+      width: 250,
       child: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(
-              Color.fromARGB(255, 252, 252, 252)),
-          foregroundColor: MaterialStateProperty.all<Color>(
-              const Color.fromARGB(255, 7, 6, 6)),
-          padding: MaterialStateProperty.all<EdgeInsets>(
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 24)),
+          backgroundColor:
+              MaterialStateProperty.all<Color>(const Color(0xFF1D3D59)),
+          foregroundColor:
+              MaterialStateProperty.all<Color>(const Color(0xFFEFEFEF)),
+          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+              const EdgeInsets.all(20)),
           textStyle: MaterialStateProperty.all<TextStyle>(
             const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
         ),
         onPressed: onClick,
         child: Row(
-          children: [Icon(icon), const Gap(12), Text(title)],
+          children: [Icon(icon, size: 25), const Gap(10), Text(title)],
         ),
       ),
     );

@@ -1,23 +1,32 @@
-name: plants
+name: medicinal_plants
 description: A new Flutter project.
 publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: '>=3.0.6 <4.0.0'
 
 dependencies:
-  camera: ^0.10.3+2
+  camera: ^0.10.5+2
   flutter:
     sdk: flutter
-  flutter_tflite: ^1.0.1
-  gap: ^2.0.1
-  image_picker: ^0.8.7
+  # flutter_tflite: ^1.0.1
+  gap: ^3.0.1
+  google_fonts: ^5.1.0
+  image_picker: ^0.8.9
+  provider: ^6.0.5
+  tflite_v2: ^1.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
 
+
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/model/model.tflite
+    - assets/model/labels.txt
+    - assets/model/details/

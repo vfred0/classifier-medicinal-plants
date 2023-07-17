@@ -10,18 +10,21 @@ class ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 250,
+    return SizedBox(      
       child: ElevatedButton(
         style: ButtonStyle(
           backgroundColor:
-              MaterialStateProperty.all<Color>(const Color(0xFF1D3D59)),
+              MaterialStateProperty.all<Color>(
+            Theme.of(context).colorScheme.secondary,
+          ),
           foregroundColor:
-              MaterialStateProperty.all<Color>(const Color(0xFFEFEFEF)),
+              MaterialStateProperty.all<Color>(
+            Theme.of(context).colorScheme.primary,
+          ),
           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
               const EdgeInsets.all(20)),
-          textStyle: MaterialStateProperty.all<TextStyle>(
-            const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          textStyle: MaterialStateProperty.all<TextStyle?>(
+            Theme.of(context).textTheme.titleMedium,
           ),
         ),
         onPressed: onClick,

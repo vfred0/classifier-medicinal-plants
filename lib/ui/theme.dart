@@ -15,14 +15,38 @@ class Theme {
             titleMedium: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Color(0xFFEFEFEF),
+              color: Color(0xFFFFFFFF),
             ),
             bodyMedium: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.normal,
               color: Color(0xFFEFEFEF),
             ),
+            bodyLarge: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              color: Color(0xFFEFEFEF),
+            ),
           ),
         ),
+      );
+
+  titleMedium(String text) => Text(
+        text,
+        style: theme().textTheme.titleMedium,
+      );
+  bodyMedium(String text) => Text(
+        text,
+        style: theme().textTheme.bodyMedium,
+      );
+
+  bodyLarge(String text) => Text(
+        text,
+        style: theme().textTheme.bodyLarge,
+      );
+
+  borderRadius(double radius, Widget child) => ClipRRect(
+        borderRadius: BorderRadius.circular(radius),
+        child: child,
       );
 }

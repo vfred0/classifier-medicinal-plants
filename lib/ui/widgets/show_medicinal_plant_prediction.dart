@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import '../../models/medicinal_plant.dart';
+import 'package:medicinal_plants/ui/theme.dart' as ui;
 
 class ShowMedicinalPlantPrediction extends StatelessWidget {
   final MedicinalPlant medicinalPlant;
@@ -11,28 +13,37 @@ class ShowMedicinalPlantPrediction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Colors.white),
-      padding: const EdgeInsets.all(8),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(32),
+          topRight: Radius.circular(32),
+        ),
+        color: Theme.of(context).colorScheme.primary,
+      ),
+      padding: const EdgeInsets.all(32),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-              'La planta pertenece a la categoría ${medicinalPlant.category.name}',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium),
-          Text(
-            'Confianza: ${(medicinalPlant.confidence)}%',
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          Container(
-              width: 350,
-              height: 400,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(32),
-              ),
-              child: Image.asset(
-                  'assets/images/${medicinalPlant.category.image}.jpg')),
+          ui.Theme().bodyLarge('Confianza: ${medicinalPlant.confidence}%'),
+          const Gap(12),
+          ui.Theme()
+              .titleMedium('La planta es ${medicinalPlant.category.name}'),
+          const Gap(12),
+          ui.Theme().bodyMedium(medicinalPlant.category.description),
+          const Gap(12),
+          ui.Theme().borderRadius(
+            32,
+            Image.asset(
+              'assets/images/${medicinalPlant.category.image}.jpg',
+              width: 200,
+              height: 200,
+              fit: BoxFit.cover,
+            ),
+          )
         ],
       ),
     );

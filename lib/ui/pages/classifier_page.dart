@@ -9,16 +9,14 @@ import 'package:medicinal_plants/models/medicinal_plant.dart';
 import 'package:medicinal_plants/ui/widgets/button.dart';
 import 'package:medicinal_plants/ui/widgets/show_medicinal_plant_prediction.dart';
 
-class ClassifierMedicinalPlantPage extends StatefulWidget {
-  const ClassifierMedicinalPlantPage({super.key});
+class ClassifierPage extends StatefulWidget {
+  const ClassifierPage({super.key});
 
   @override
-  State<ClassifierMedicinalPlantPage> createState() =>
-      _ClassifierMedicinalPlantPageState();
+  State<ClassifierPage> createState() => _ClassifierPageState();
 }
 
-class _ClassifierMedicinalPlantPageState
-    extends State<ClassifierMedicinalPlantPage> {
+class _ClassifierPageState extends State<ClassifierPage> {
   File? _image;
   MedicinalPlant? _medicinalPlant;
 
@@ -81,7 +79,7 @@ class _ClassifierMedicinalPlantPageState
     var height = 300.0;
 
     if (_image != null) {
-      return Container(        
+      return Container(
         child: ui.Theme().borderRadius(
             32,
             Image.file(_image!,

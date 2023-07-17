@@ -1,5 +1,5 @@
 import 'package:medicinal_plants/ui/theme.dart' as ui;
-import 'package:medicinal_plants/ui/pages/classifier_medicinal_plants_page.dart';
+import 'package:medicinal_plants/ui/pages/classifier_page.dart';
 import 'package:medicinal_plants/ui/pages/neural_network_details_page.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +30,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   double buttonSize = 30;
   static const List<Widget> _widgetOptions = <Widget>[
-    ClassifierMedicinalPlantPage(),
+    ClassifierPage(),
     NeuralNetworkDetailsPage()
   ];
 
@@ -58,7 +58,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           child: _widgetOptions.elementAt(_selectedIndex),
         )),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: ui.Theme().theme().colorScheme.primary,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Icon(

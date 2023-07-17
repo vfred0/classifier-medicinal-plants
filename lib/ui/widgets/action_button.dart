@@ -33,7 +33,7 @@ class ActionButton extends StatelessWidget {
           ),
         ),
         onPressed: onClick,
-        child: Expanded(
+        child: SizedBox(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

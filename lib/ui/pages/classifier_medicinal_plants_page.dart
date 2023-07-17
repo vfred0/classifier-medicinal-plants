@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:medicinal_plants/ui/theme.dart' as ui;
 import 'package:image_picker/image_picker.dart';
 import 'package:medicinal_plants/utils/classifier_medicinal_plant.dart';
 import 'package:medicinal_plants/models/medicinal_plant.dart';
@@ -32,7 +33,7 @@ class _ClassifierMedicinalPlantPageState
           alignment: MainAxisAlignment.center,
           children: [
             ActionButton(
-              'Subir desde galería',
+              'Cargar desde galería',
               Icons.image_outlined,
               () => loadImageAndSetPrediction(ImageSource.gallery),
             ),
@@ -76,27 +77,27 @@ class _ClassifierMedicinalPlantPageState
   }
 
   Widget showDefaultImageOrFromMultimedia() {
+    var width = 450.0;
+    var height = 300.0;
+
     if (_image != null) {
-      return Container(
-        width: 500,
-        height: 400,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(32),
-        ),
-        child: Image.file(_image!, fit: BoxFit.cover),
+      return Container(        
+        child: ui.Theme().borderRadius(
+            32,
+            Image.file(_image!,
+                width: width, height: height, fit: BoxFit.cover)),
       );
     }
 
     return Container(
-      width: 500,
-      height: 400,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(32),
-        image: const DecorationImage(
-          image: AssetImage('assets/images/camera.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
+      child: ui.Theme().borderRadius(
+          32,
+          Image.asset(
+            'assets/images/camera.jpg',
+            width: width,
+            height: height,
+            fit: BoxFit.cover,
+          )),
     );
   }
 }

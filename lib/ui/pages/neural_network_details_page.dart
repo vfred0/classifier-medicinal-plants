@@ -12,7 +12,7 @@ class NeuralNetworkDetailsPage extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [          
-          ui.Theme().titleMedium('Arquitectura Xception'),          
+          ui.Theme().titleMedium('Arquitectura con Xception'),          
           const Gap(12),
           ui.Theme().borderRadius(
             32,

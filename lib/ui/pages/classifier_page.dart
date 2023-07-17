@@ -32,17 +32,17 @@ class _ClassifierPageState extends State<ClassifierPage> {
           children: [
             ActionButton(
               'Cargar desde galería',
-              Icons.image_outlined,
+              Icons.image,
               () => loadImageAndSetPrediction(ImageSource.gallery),
             ),
             const SizedBox(height: 12),
-            ActionButton('Usar cámara', Icons.camera_alt_outlined,
+            ActionButton('Usar cámara', Icons.camera_alt,
                 () => loadImageAndSetPrediction(ImageSource.camera)),
             const SizedBox(height: 12),
             if (_medicinalPlant != null)
               ActionButton(
                 'Ver predicción',
-                Icons.remove_red_eye_outlined,
+                Icons.remove_red_eye,
                 () => showModalBottomSheet(
                   context: context,
                   builder: (BuildContext buildContext) {

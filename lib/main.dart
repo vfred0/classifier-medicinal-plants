@@ -65,7 +65,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   Icons.camera_alt_outlined,
                   size: buttonSize,
                 ),
-                label: 'Tomar foto',
+                label: 'Clasificador',
                 backgroundColor: Theme.of(context).colorScheme.secondary),
             BottomNavigationBarItem(
                 icon: Icon(

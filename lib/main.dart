@@ -2,36 +2,37 @@ import 'package:medicinal_plants/ui/theme.dart' as ui;
 import 'package:medicinal_plants/ui/pages/classifier_page.dart';
 import 'package:medicinal_plants/ui/pages/neural_network_details_page.dart';
 import 'package:flutter/material.dart';
+import 'package:medicinal_plants/ui/widgets/menu.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(const MedicinalPlantApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MedicinalPlantApp extends StatelessWidget {
+  const MedicinalPlantApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ui.Theme().theme(),
       title: 'Clasificador de plantas medicinales',
-      home: const MyStatefulWidget(),
+      home: const ScaffoldWithMenu(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({super.key});
+class ScaffoldWithMenu extends StatefulWidget {
+  const ScaffoldWithMenu({Key? key}) : super(key: key);
 
   @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+  State<ScaffoldWithMenu> createState() => _ScaffoldWithMenuState();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _ScaffoldWithMenuState extends State<ScaffoldWithMenu> {
   int _selectedIndex = 0;
-  double buttonSize = 30;
+
   static const List<Widget> _widgetOptions = <Widget>[
     ClassifierPage(),
-    NeuralNetworkDetailsPage()
+    NeuralNetworkDetailsPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -42,45 +43,25 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        appBar: AppBar(        
-          title: Text(
-            'Clasificador de plantas medicinales',
-            style: Theme.of(context).textTheme.titleMedium,
-            selectionColor: Theme.of(context).colorScheme.secondary,
-          ),          
-          backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      appBar: AppBar(
+        title: Text(
+          'Clasificador de plantas medicinales',
+          style: Theme.of(context).textTheme.titleMedium,
+          selectionColor: Theme.of(context).colorScheme.secondary,
         ),
-        body: SingleChildScrollView(
-            child: Center(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+      ),
+      body: SingleChildScrollView(
+        child: Center(
           child: _widgetOptions.elementAt(_selectedIndex),
-        )),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: ui.Theme().theme().colorScheme.primary,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.camera_alt_outlined,
-                  size: buttonSize,
-                ),
-                label: 'Clasificador',
-                backgroundColor: Theme.of(context).colorScheme.secondary),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.list_alt_outlined,
-                  size: buttonSize,
-                ),
-                label: 'Red neuronal',
-                backgroundColor: Theme.of(context).colorScheme.secondary),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Theme.of(context).colorScheme.tertiary,
-          unselectedItemColor: Theme.of(context).colorScheme.secondary,
-          selectedLabelStyle: Theme.of(context).textTheme.titleMedium,
-          unselectedLabelStyle: Theme.of(context).textTheme.bodyMedium,
-          onTap: _onItemTapped,
-        ));
+        ),
+      ),
+      bottomNavigationBar: Menu(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
+      ),
+    );
   }
 }

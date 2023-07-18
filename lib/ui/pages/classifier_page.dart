@@ -1,7 +1,5 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:medicinal_plants/ui/theme.dart' as ui;
 import 'package:image_picker/image_picker.dart';
 import 'package:medicinal_plants/utils/classifier_medicinal_plant.dart';
@@ -22,40 +20,29 @@ class _ClassifierPageState extends State<ClassifierPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Gap(12),
-        showDefaultImageOrFromMultimedia(),
-        const Gap(12),
-        ButtonBar(
-          alignment: MainAxisAlignment.center,
-          children: [
-            ActionButton(
-              'Cargar desde galería',
-              Icons.image,
-              () => loadImageAndSetPrediction(ImageSource.gallery),
-            ),
-            const Gap(12),
-            ActionButton('Usar cámara', Icons.camera_alt,
-                () => loadImageAndSetPrediction(ImageSource.camera)),
-            const Gap(12),
-            if (_medicinalPlant != null)
-              ActionButton(
-                'Ver predicción',
-                Icons.remove_red_eye,
-                () => showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext buildContext) {
-                    return ShowMedicinalPlantPrediction(
-                      medicinalPlant: _medicinalPlant!,
-                    );
-                  },
-                ),
-              ),
-          ],
+    return ui.Theme().column(widgets: [
+      showDefaultImageOrFromMultimedia(),
+      _button('Cargar desde galería', Icons.image, ImageSource.gallery),
+      _button('Usar cámara', Icons.camera_alt, ImageSource.camera),
+      if (_medicinalPlant != null)
+        ActionButton(
+          'Ver predicción',
+          Icons.remove_red_eye,
+          () => showModalBottomSheet(
+            context: context,
+            builder: (BuildContext buildContext) {
+              return ShowMedicinalPlantPrediction(
+                medicinalPlant: _medicinalPlant!,
+              );
+            },
+          ),
         ),
-      ],
-    );
+    ], gap: 12);
+  }
+
+  ActionButton _button(String title, IconData icon, ImageSource imageSource) {
+    return ActionButton(
+        title, icon, () => loadImageAndSetPrediction(imageSource));
   }
 
   Future<void> loadImageAndSetPrediction(ImageSource imageSource) {

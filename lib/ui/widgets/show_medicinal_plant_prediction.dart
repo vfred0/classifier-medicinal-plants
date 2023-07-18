@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-
 import '../../models/medicinal_plant.dart';
 import 'package:medicinal_plants/ui/theme.dart' as ui;
 
@@ -12,6 +10,7 @@ class ShowMedicinalPlantPrediction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = ui.Theme();
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -25,27 +24,20 @@ class ShowMedicinalPlantPrediction extends StatelessWidget {
         color: Theme.of(context).colorScheme.primary,
       ),
       padding: const EdgeInsets.all(32),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ui.Theme().bodyLarge('Confianza: ${medicinalPlant.confidence}%'),                    
-          const Gap(12),
-          ui.Theme()
-              .titleMedium('La planta es ${medicinalPlant.category.name}'),
-          const Gap(12),
-          ui.Theme().bodyMedium(medicinalPlant.category.description),
-          const Gap(12),
-          ui.Theme().borderRadius(
-            32,
-            Image.asset(
-              'assets/images/categories/${medicinalPlant.category.image}.jpg',
-              width: 200,
-              height: 200,
-              fit: BoxFit.cover,
-            ),
-          )
-        ],
-      ),
+      child: theme.column(widgets: [
+        theme.bodyLarge('Confianza: ${medicinalPlant.confidence}%'),
+        theme.titleMedium('La planta es ${medicinalPlant.category.name}'),
+        theme.bodyMedium(medicinalPlant.category.description),
+        theme.borderRadius(
+          32,
+          Image.asset(
+            'assets/images/categories/${medicinalPlant.category.image}.jpg',
+            width: 200,
+            height: 200,
+            fit: BoxFit.cover,
+          ),
+        )
+      ], gap: 12),
     );
   }
 }

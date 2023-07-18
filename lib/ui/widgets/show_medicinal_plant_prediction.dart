@@ -38,7 +38,7 @@ class ShowMedicinalPlantPrediction extends StatelessWidget {
           ui.Theme().borderRadius(
             32,
             Image.asset(
-              'assets/images/${medicinalPlant.category.image}.jpg',
+              'assets/images/categories/${medicinalPlant.category.image}.jpg',
               width: 200,
               height: 200,
               fit: BoxFit.cover,

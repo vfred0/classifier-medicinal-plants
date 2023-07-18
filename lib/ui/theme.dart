@@ -51,13 +51,14 @@ class Theme {
         child: child,
       );
 
-  Widget column(List<Widget> widgets, int gap) {
+  Widget column({required List<Widget> widgets, required double gap}) {
     List<Widget> widgetsWithGap = [];
     for (var element in widgets) {
       widgetsWithGap.add(element);
-      widgetsWithGap.add(Gap(gap.toDouble()));
+      widgetsWithGap.add(Gap(gap));
     }
-    return Column(
+    return Column(      
+      mainAxisSize: MainAxisSize.min,
       children: widgetsWithGap,
     );
   }

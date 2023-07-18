@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Theme {
@@ -8,7 +9,7 @@ class Theme {
               primary: const Color(0xFF161D22),
               secondary: const Color(0xFFEFEFEF),
               tertiary: const Color(0xFF20B266),
-              brightness: Brightness.dark,              
+              brightness: Brightness.dark,
             ),
         textTheme: GoogleFonts.montserratTextTheme(
           const TextTheme(
@@ -26,27 +27,38 @@ class Theme {
               fontSize: 18,
               fontWeight: FontWeight.w500,
               color: Color(0xFFEFEFEF),
-            ),            
+            ),
           ),
         ),
       );
 
-  titleMedium(String text) => Text(
+  Widget titleMedium(String text) => Text(
         text,
         style: theme().textTheme.titleMedium,
       );
-  bodyMedium(String text) => Text(
+  Widget bodyMedium(String text) => Text(
         text,
         style: theme().textTheme.bodyMedium,
       );
 
-  bodyLarge(String text) => Text(
+  Widget bodyLarge(String text) => Text(
         text,
         style: theme().textTheme.bodyLarge,
       );
 
-  borderRadius(double radius, Widget child) => ClipRRect(
+  Widget borderRadius(double radius, Widget child) => ClipRRect(
         borderRadius: BorderRadius.circular(radius),
         child: child,
       );
+
+  Widget column(List<Widget> widgets, int gap) {
+    List<Widget> widgetsWithGap = [];
+    for (var element in widgets) {
+      widgetsWithGap.add(element);
+      widgetsWithGap.add(Gap(gap.toDouble()));
+    }
+    return Column(
+      children: widgetsWithGap,
+    );
+  }
 }

@@ -35,10 +35,10 @@ class _ClassifierPageState extends State<ClassifierPage> {
               Icons.image,
               () => loadImageAndSetPrediction(ImageSource.gallery),
             ),
-            const SizedBox(height: 12),
+            const Gap(12),
             ActionButton('Usar cámara', Icons.camera_alt,
                 () => loadImageAndSetPrediction(ImageSource.camera)),
-            const SizedBox(height: 12),
+            const Gap(12),
             if (_medicinalPlant != null)
               ActionButton(
                 'Ver predicción',

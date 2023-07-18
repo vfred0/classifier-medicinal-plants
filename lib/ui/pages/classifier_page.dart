@@ -22,8 +22,9 @@ class _ClassifierPageState extends State<ClassifierPage> {
   Widget build(BuildContext context) {
     return ui.Theme().column(widgets: [
       showDefaultImageOrFromMultimedia(),
-      _button('Cargar desde galería', Icons.image, ImageSource.gallery),
-      _button('Usar cámara', Icons.camera_alt, ImageSource.camera),
+      _multimediaButton(
+          'Cargar desde galería', Icons.image, ImageSource.gallery),
+      _multimediaButton('Usar cámara', Icons.camera_alt, ImageSource.camera),
       if (_medicinalPlant != null)
         ActionButton(
           'Ver predicción',
@@ -40,7 +41,8 @@ class _ClassifierPageState extends State<ClassifierPage> {
     ], gap: 12);
   }
 
-  ActionButton _button(String title, IconData icon, ImageSource imageSource) {
+  ActionButton _multimediaButton(
+      String title, IconData icon, ImageSource imageSource) {
     return ActionButton(
         title, icon, () => loadImageAndSetPrediction(imageSource));
   }
